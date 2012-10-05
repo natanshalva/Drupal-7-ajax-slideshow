@@ -1,0 +1,32 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function fistuki_drawing_menu() {
+    $items = array();
+    $items['ajax/drawing'] = array (
+		'title' => '',
+		'page callback' => 'fistuki_drawing_files',
+		'page arguments' => array (),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,	
+	);
+
+ return $items;
+};
+
+
+function fistuki_drawing_test(){
+    $dir = "sites/default/files/drawing";
+    $list_of_files = scandir($dir);	
+    return $list_of_files;
+}
+
+function fistuki_drawing_files(){
+        
+  $arrayItems =  fistuki_drawing_test();
+  drupal_json_output($arrayItems);
+  drupal_exit();
+  
+
+};
